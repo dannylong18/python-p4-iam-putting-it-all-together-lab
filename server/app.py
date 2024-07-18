@@ -78,19 +78,16 @@ class CheckSession(Resource):
     #     return {'error': 'please login or signup'}, 401
 
     def get(self):
-        # Check if 'user_id' is in the session
         user_id = session.get('user_id')
         if user_id:
-            user = User.query.get(user_id)
+            user = session.get(User, user_id)
             if user:
-                # Return user details as JSON
                 return {
                     'id': user.id,
                     'username': user.username,
                     'image_url': user.image_url,
                     'bio': user.bio
                 }, 200
-        # If no user is logged in, return unauthorized error
         return {'error': 'Unauthorized'}, 401
 
 class Login(Resource):
