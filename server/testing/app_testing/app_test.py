@@ -277,7 +277,7 @@ class TestRecipeIndex:
         
             response = client.get('/recipes')
             response_json = response.get_json()
-
+            print (type(response_json))
             assert response.status_code == 200
             for i in range(15):
                 assert response_json[i]['title']
